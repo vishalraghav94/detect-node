@@ -1,9 +1,11 @@
 # detect-node
 JS library to detect addition of nodes on web page
 
-#Usage
+# Usage
 use function:
-#### NodeDetect(timing,callack);
+```
+NodeDetect(timing,callback);
+```
 where
 **timing** : time limit between the adjacent function calls or to throttle down the event capturing by an specified time. (in ms)
 
