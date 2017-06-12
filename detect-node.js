@@ -1,5 +1,5 @@
 	(function () {
-		var limit = 0; //default time limit
+		var limit = 0; //default time limit (if time parameter is not passed)
 		var nodeDetect = {
 			init: function (callback) {
 				var css = "@keyframes nodeInserted {} @-moz-keyframes nodeInserted{} @-webkit-keyframes nodeInserted {} @-ms-keyframes nodeInserted {} @-o-keyfames nodeInserted{} body * {animation: nodeInserted 0s; -webkit-animation: nodeInserted 0s; -moz-animation: nodeInserted 0s; -ms-animation: nodeInserted 0s; -o-animation: nodeInserted 0s;}";
