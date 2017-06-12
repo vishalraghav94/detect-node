@@ -23,14 +23,26 @@
 				head.appendChild(style);
 			},
 			throttle: function (callback,limit) {
-				var wait = false;
+						var wait = false,count=0,flag=true;
 				return function () {
 					if (!wait) {
-						callback.apply(null, arguments);
+						count = 0;
 						wait = true;
+						if(flag) {
+							callback.apply(null, arguments);
+						}
+						var args = arguments;
 						setTimeout(function () {
 							wait = false;
+							if(count>0){
+								callback.apply(null, args);
+								flag = false;
+							}
+							count = 0;
 						}, limit);
+					} else {
+						count++;
+						flag = true;
 					}
 				}
 			}
