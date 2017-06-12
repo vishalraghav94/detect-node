@@ -48,7 +48,7 @@
 			}
 		}
 
-		window.NodeDetect = function (time, callback) {
+		window.NodeDetect = function (callback, time) {
 			limit = time || limit;
 			nodeDetect.init(callback);
 		}
