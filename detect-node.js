@@ -28,16 +28,28 @@
 					if (!wait) {
 						count = 0;
 						wait = true;
+						
 						if(flag) {
 							callback.apply(null, arguments);
+							console.log("outside");
+						}
+						else{
+							console.log("not called");
+							count++;
 						}
 						var args = arguments;
 						setTimeout(function () {
 							wait = false;
 							if(count>0){
 								callback.apply(null, args);
+								console.log("inside count");
 								flag = false;
+								setTimeout(function(){
+									flag=true;
+								},limit);
 							}
+							else
+								flag=true;
 							count = 0;
 						}, limit);
 					} else {
