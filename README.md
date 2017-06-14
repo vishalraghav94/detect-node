@@ -7,8 +7,10 @@ use function:
 NodeDetect(callback,selectors,timing);
 ```
 where
-**selectors(Optional- ["body *"] by default)** : list of selectors path inside
+
+**selectors(Optional- ["body \*"] by default)** : list of selectors path inside
 which node detected is to be implemented.
+
 **timing(Optional- 0ms by default)** : time limit between the adjacent function calls or to throttle down the event capturing by an specified time. (in ms)
 
 **callback** : Function to execute when event is captured on detection of node 
