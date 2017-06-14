@@ -8,72 +8,52 @@
 		 *
 		 * @param callback - function to execute when node is detected
 		 * @param selectors - list of selectors path in which node detection is to be implemented
-         */
-		init: function (callback,selectors) {
+		 */
+		init: function (callback, selectors) {
 			var selectorsString = selectors.join(",");
 			var animationValues = "{animation: nodeInserted 0s; -webkit-animation: nodeInserted 0s; -moz-animation: nodeInserted 0s; -ms-animation: nodeInserted 0s; -o-animation: nodeInserted 0s;}";
-			var css = "@keyframes nodeInserted {} @-moz-keyframes nodeInserted{} @-webkit-keyframes nodeInserted {} @-ms-keyframes nodeInserted {} @-o-keyfames nodeInserted{} "+selectorsString+animationValues;
+			var css = "@keyframes nodeInserted {} @-moz-keyframes nodeInserted{} @-webkit-keyframes nodeInserted {} @-ms-keyframes nodeInserted {} @-o-keyfames nodeInserted{} " + selectorsString + animationValues;
 			this.appendCSS(css);
-			window.addEventListener('animationstart', this.throttle(function(event) {
+			window.addEventListener('animationstart', this.throttle(function (event) {
 				if (event.animationName == 'nodeInserted') {
 					callback(event);
 				}
-			},limit), true);
+			}, limit), true);
 		},
 		/**
 		 *
 		 * @param css - css styling to be added to style tag
-         */
+		 */
 		appendCSS: function (css) {
-			var head = document.head || document.getElementsbyTagName('head')[0] ,
+			var head = document.head || document.getElementsbyTagName('head')[0],
 				style = document.createElement('style');
 			style.type = 'text/css';
-			if(style.styleSheet) {
+			if (style.styleSheet) {
 				style.styleSheet.cssText = css;
 			} else {
 				style.appendChild(document.createTextNode(css));
 			}
 			head.appendChild(style);
 		},
-		throttle: function (callback,limit) {
-			var wait = false, count = 0, flag = true;
-			if (limit !== 0) {
-				return function () {
-					if (!wait) {
-						count = 0;
-						wait = true;
-						if (flag) {
-							callback.apply(null, arguments);
-						}
-						else {
-							count++;
-						}
-						var args = arguments;
-						setTimeout(function () {
-							wait = false;
-							if (count > 0) {
-								callback.apply(null, args);
-								flag = false;
-								setTimeout(function(){
-									flag=true;
-								},limit);
-							}
-							else
-								flag = true;
-							count = 0;
-						}, limit);
-					} else {
-						count++;
-						flag = true;
-					}
+		throttle: function (fn, threshhold,scope) {
+			var last,
+				deferTimer;
+			return function () {
+				var context = scope || this;
+				var now = +new Date,
+					args = arguments;
+				if (last && now < last + threshhold) {
+					// hold on to it
+					clearTimeout(deferTimer);
+					deferTimer = setTimeout(function () {
+						last = now;
+						fn.apply(context, args);
+					}, threshhold);
+				} else {
+					last = now;
+					fn.apply(context, args);
 				}
 			}
-			else {
-				return function(){
-					callback.apply(null,arguments);
-				}
-			}
-
 		}
 	};
 
