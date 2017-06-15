@@ -4,7 +4,7 @@ JS library to detect addition of nodes on web page
 # Usage
 use function:
 ```
-NodeDetect(callback,selectors,timing);
+NodeDetect(callback, selectors, timing);
 ```
 where
 
@@ -18,7 +18,7 @@ on web page.
 
 # Example
 ```
-NodeDetect(function(){
-console.log("Node Detected");
-},["div","p","a"],3000);
+NodeDetect(function() {
+   console.log("Node Detected");
+}, ["div","p","a"], 3000);
 ```
