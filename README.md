@@ -9,7 +9,7 @@ NodeDetect(callback, selectors, timing);
 where
 
 **selectors(Optional- ["body \*"] by default)** : list of selectors path inside
-which node detected is to be implemented.
+which node detection is to be implemented.
 
 **timing(Optional- 0ms by default)** : time limit between the adjacent function calls or to throttle down the event capturing by an specified time. (in ms)
 
