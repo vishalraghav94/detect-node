@@ -20,5 +20,6 @@ on web page.
 ```
 NodeDetect(function() {
    console.log("Node Detected");
-}, ["div","p","a"], 3000);
+}, ["div *","p *","a *"], 3000);
 ```
+##### " * " is important if node detection is to be applied inside the given selector.
